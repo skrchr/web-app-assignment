@@ -8,11 +8,6 @@ The application requires a TMDB API key. Set it up using the `local.properties` 
 
 #### Step 1: Get your TMDB API Key
 
-1. Go to [TMDB Settings](https://www.themoviedb.org/settings/api)
-2. Create an account or log in
-3. Request an API key (choose "Developer" option)
-4. Copy your API key
-
 #### Step 2: Configure local.properties
 
 1. In the **project root** directory (`web-app-assignment/`), open `local.properties`
@@ -55,15 +50,12 @@ mvn test -Dtest=TmdbApiServiceIntegrationTest
 mvn test
 ````
 
-### IDE Support (VS Code / Cursor)
-
-The `local.properties` configuration works seamlessly with VS Code, Cursor, and other IDEs. No additional IDE configuration needed - just set up the `local.properties` file and run tests directly from your IDE.
-
 ## Development
 
 The application uses Spring Boot with the following features:
 
 - REST API for TMDB movie data
 - Unit tests with TDD approach
+- Integration tests
 - Docker support
 - Clean architecture pattern
