@@ -16,9 +16,31 @@ web-app-assignment/
 
 - Docker
 - Docker Compose
+- **TMDB API Key** (Required - see setup below)
 - Node.js (for local development)
 - Java 20 (for local development)
 - Maven (for local development)
+
+## Setup
+
+### 1. Get TMDB API Key
+
+### 2. Configure API Key
+
+Create a `local.properties` file in the project root:
+
+```bash
+# Copy the example file
+cp local.properties.example local.properties
+```
+
+Edit `local.properties` and add your API key:
+
+```properties
+tmdb.api.key=your_actual_api_key_here
+```
+
+**Important:** This file is gitignored and will not be committed.
 
 ## Quick Start
 
@@ -81,10 +103,34 @@ Access at: http://localhost:8080
 - **Framework:** Spring Boot 3.2.0
 - **Java Version:** 20
 
-## API Configuration
+## Technology Stack
 
-The frontend is configured to proxy API requests to the backend:
+### Frontend
 
-- Frontend API calls to `/api/*` are automatically forwarded to the backend
-- Backend runs on port 8080 internally
-- Frontend runs on port 4200 externally
+- **Framework:** Angular 19
+- **UI Library:** PrimeNG 19 (Netflix-style red theme)
+- **HTTP Client:** Angular HttpClient with RxJS
+- **Routing:** Angular Router
+- **Styling:** SCSS with responsive design
+
+### Backend
+
+- **Framework:** Spring Boot 3.2.0
+- **Language:** Java 20
+- **Build Tool:** Maven
+- **Architecture:** Clean Architecture (Boundary-Control-Entity pattern)
+- **Testing:** JUnit 5, Integration Tests
+
+### DevOps
+
+- **Containerization:** Docker
+- **Orchestration:** Docker Compose
+- **Web Server:** Nginx (production)
+
+## Architecture
+
+- **Frontend** → Communicates with backend via REST API
+- **Backend** → Proxies requests to TMDB API
+- **TMDB API** → Source of movie data
+
+API requests flow: `Frontend (localhost:4200)` → `Backend (localhost:8080)` → `TMDB API`
