@@ -1,0 +1,55 @@
+<div class="search-suggestions">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="suggestions-loading">
+    <div *ngFor="let i of [1,2,3,4,5]" class="suggestion-item">
+      <p-skeleton shape="rectangle" width="60px" height="90px"></p-skeleton>
+      <div class="suggestion-content">
+        <p-skeleton width="70%" height="1.2rem" styleClass="mb-2"></p-skeleton>
+        <p-skeleton width="40%" height="1rem"></p-skeleton>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div *ngIf="!loading && movies.length > 0" class="suggestions-results">
+    <div
+      *ngFor="let movie of movies"
+      class="suggestion-item"
+      (click)="onMovieClick(movie.id)"
+    >
+      <div class="suggestion-poster">
+        <img
+          *ngIf="movie.poster_path"
+          [src]="getPosterUrl(movie.poster_path)"
+          [alt]="movie.title"
+          loading="lazy"
+        />
+        <div *ngIf="!movie.poster_path" class="no-poster">
+          <i class="pi pi-image"></i>
+        </div>
+      </div>
+      <div class="suggestion-content">
+        <h4 class="suggestion-title">{{ movie.title }}</h4>
+        <div class="suggestion-meta">
+          <span class="suggestion-year">{{ getYear(movie.release_date) }}</span>
+          <span class="suggestion-rating">
+            <i class="pi pi-star-fill"></i>
+            {{ movie.vote_average | number: '1.1-1' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="!loading && !hasError && movies.length === 0 && query.length > 0" class="suggestions-empty">
+    <i class="pi pi-search"></i>
+    <p>No movies found for "{{ query }}"</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading && hasError" class="suggestions-error">
+    <i class="pi pi-exclamation-circle"></i>
+    <p>Unable to load suggestions</p>
+  </div>
+</div>

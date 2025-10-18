@@ -1,0 +1,133 @@
+<div class="movie-details">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="back-button-skeleton">
+      <p-skeleton width="120px" height="40px"></p-skeleton>
+    </div>
+    <div class="content-skeleton">
+      <p-skeleton width="100%" height="400px" styleClass="mb-3"></p-skeleton>
+      <p-skeleton width="60%" height="2.5rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="30%" height="1.2rem" styleClass="mb-3"></p-skeleton>
+      <p-skeleton width="100%" height="6rem" styleClass="mb-3"></p-skeleton>
+      <p-skeleton width="40%" height="1.5rem" styleClass="mb-2"></p-skeleton>
+    </div>
+  </div>
+
+  <!-- Movie Content -->
+  <div *ngIf="!loading && movie" class="movie-content">
+    <!-- Back Button -->
+    <div class="back-button-container">
+      <p-button
+        label="Back to Movies"
+        icon="pi pi-arrow-left"
+        severity="secondary"
+        [text]="true"
+        (onClick)="goBack()"
+      ></p-button>
+    </div>
+
+    <!-- Backdrop Image -->
+    <div class="backdrop-container">
+      <img
+        *ngIf="movie.backdrop_path"
+        [src]="getBackdropUrl(movie.backdrop_path)"
+        [alt]="movie.title"
+        class="backdrop-image"
+      />
+      <div *ngIf="!movie.backdrop_path" class="backdrop-placeholder">
+        <i class="pi pi-image"></i>
+      </div>
+      <div class="backdrop-overlay"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="details-container">
+      <div class="details-grid">
+        <!-- Poster -->
+        <div class="poster-section">
+          <div class="poster-wrapper">
+            <img
+              *ngIf="movie.poster_path"
+              [src]="getPosterUrl(movie.poster_path)"
+              [alt]="movie.title"
+              class="poster-image"
+            />
+            <div *ngIf="!movie.poster_path" class="no-poster">
+              <i class="pi pi-image"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Details -->
+        <div class="info-section">
+          <!-- Title -->
+          <h1 class="movie-title">{{ movie.title }}</h1>
+
+          <!-- Meta Information -->
+          <div class="meta-info">
+            <span class="release-date" *ngIf="movie.release_date">
+              <i class="pi pi-calendar"></i>
+              {{ movie.release_date | date: 'MMMM d, yyyy' }}
+            </span>
+            <span class="runtime" *ngIf="movie.runtime">
+              <i class="pi pi-clock"></i>
+              {{ getRuntime(movie.runtime) }}
+            </span>
+            <span class="language" *ngIf="movie.original_language">
+              <i class="pi pi-globe"></i>
+              {{ movie.original_language | uppercase }}
+            </span>
+          </div>
+
+          <!-- Rating -->
+          <div class="rating-section">
+            <div class="rating-value">
+              <i class="pi pi-star-fill"></i>
+              <span class="rating-number">{{ movie.vote_average | number: '1.1-1' }}</span>
+              <span class="rating-total">/10</span>
+            </div>
+            <span class="vote-count" *ngIf="movie.vote_count">
+              {{ movie.vote_count | number }} votes
+            </span>
+          </div>
+
+          <!-- Genres -->
+          <div class="genres-section" *ngIf="movie.genres && movie.genres.length > 0">
+            <h3>Genres</h3>
+            <div class="genres-list">
+              <span *ngFor="let genre of movie.genres" class="genre-tag">
+                {{ genre.name }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Overview -->
+          <div class="overview-section">
+            <h3>Overview</h3>
+            <p class="overview-text">{{ movie.overview || 'No overview available.' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading && error" class="error-state">
+    <i class="pi pi-exclamation-triangle"></i>
+    <h3>Oops! Something went wrong</h3>
+    <p>{{ error }}</p>
+    <div class="error-actions">
+      <p-button
+        label="Try Again"
+        severity="danger"
+        (onClick)="retry()"
+      ></p-button>
+      <p-button
+        label="Back to Movies"
+        severity="secondary"
+        [text]="true"
+        (onClick)="goBack()"
+      ></p-button>
+    </div>
+  </div>
+</div>

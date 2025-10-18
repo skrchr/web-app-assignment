@@ -1,0 +1,122 @@
+<div class="homepage">
+  <!-- Header Section -->
+  <div class="header">
+    <h1 class="title">Discover Movies</h1>
+    <p class="subtitle">Explore the most popular movies and find your next favorite</p>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <div class="search-container" #searchContainer>
+      <p-iconfield iconPosition="left" class="search-bar">
+        <p-inputicon styleClass="pi pi-search" />
+        <input
+          type="text"
+          pInputText
+          placeholder="Search for movies..."
+          [(ngModel)]="searchQuery"
+          (input)="onSearchInput()"
+          (focus)="onSearchFocus()"
+          (blur)="onSearchBlur()"
+          (keyup.enter)="onSearch()"
+        />
+      </p-iconfield>
+      <p-button
+        label="Search"
+        icon="pi pi-search"
+        severity="danger"
+        (onClick)="onSearch()"
+        [disabled]="!searchQuery || searchQuery.trim().length === 0"
+      ></p-button>
+
+      <!-- Search Suggestions Dropdown -->
+      <app-search-suggestions
+        *ngIf="showSuggestions"
+        [movies]="suggestions"
+        [loading]="suggestionsLoading"
+        [query]="searchQuery"
+        [hasError]="suggestionsError"
+        (movieSelected)="onSuggestionSelected($event)"
+      ></app-search-suggestions>
+    </div>
+  </div>
+
+  <!-- Results Header -->
+  <div class="section-header">
+    <h2>{{ isSearching ? 'Search Results' : 'Popular Movies' }}</h2>
+    <p-button
+      *ngIf="isSearching"
+      label="Clear Search"
+      icon="pi pi-times"
+      severity="secondary"
+      [text]="true"
+      (onClick)="clearSearch()"
+    ></p-button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-grid">
+    <p-skeleton *ngFor="let i of [1,2,3,4,5,6,7,8]" height="400px"></p-skeleton>
+  </div>
+
+  <!-- Movies Carousel -->
+  <div *ngIf="!loading && movies.length > 0" class="carousel-container">
+    <button
+      class="carousel-nav carousel-nav-left"
+      (click)="scrollLeft()"
+      [disabled]="!canScrollLeft"
+      *ngIf="canScrollLeft"
+    >
+      <i class="pi pi-chevron-left"></i>
+    </button>
+
+    <div class="movies-carousel" #moviesCarousel>
+      <div *ngFor="let movie of movies" class="movie-card" (click)="onMovieClick(movie.id)">
+        <div class="movie-poster">
+          <img
+            *ngIf="movie.poster_path"
+            [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+            [alt]="movie.title"
+            loading="lazy"
+          />
+          <div *ngIf="!movie.poster_path" class="no-poster">
+            <i class="pi pi-image"></i>
+          </div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">{{ movie.title }}</h3>
+          <p class="movie-date">{{ movie.release_date | date: 'MMM d, yyyy' }}</p>
+          <div class="movie-rating">
+            <i class="pi pi-star-fill"></i>
+            <span>{{ movie.vote_average | number: '1.1-1' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="carousel-nav carousel-nav-right"
+      (click)="scrollRight()"
+      [disabled]="!canScrollRight"
+      *ngIf="canScrollRight"
+    >
+      <i class="pi pi-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && movies.length === 0" class="empty-state">
+    <i class="pi pi-search"></i>
+    <h3>No movies found</h3>
+    <p>Try adjusting your search terms</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading && error" class="error-state">
+    <i class="pi pi-exclamation-triangle"></i>
+    <h3>Oops! Something went wrong</h3>
+    <p>{{ error }}</p>
+    <p-button label="Try Again" severity="danger" (onClick)="retry()"></p-button>
+  </div>
+</div>
+
