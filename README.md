@@ -94,8 +94,8 @@ Access at: http://localhost:8080
 ### Frontend (Angular)
 
 - **Port:** 4200
-- **Framework:** Angular 17
-- **Web Server:** Nginx
+- **Framework:** Angular 19
+- **Web Server:** Nginx/Webpack
 
 ### Backend (Spring Boot)
 
