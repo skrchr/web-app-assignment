@@ -1,1 +1,3 @@
 /Users/chris/web-app-assignment/backend/src/test/java/web/example/com/demo/DemoApplicationTests.java
+/Users/chris/web-app-assignment/backend/src/test/java/web/example/com/tmdb/components/tmdb/business/boundary/TmdbApiServiceIntegrationTest.java
+/Users/chris/web-app-assignment/backend/src/test/java/web/example/com/tmdb/components/tmdb/business/boundary/TmdbApiServiceTest.java

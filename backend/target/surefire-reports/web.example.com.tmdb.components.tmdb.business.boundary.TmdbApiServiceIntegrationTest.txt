@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: web.example.com.tmdb.components.tmdb.business.boundary.TmdbApiServiceIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.194 s <<< FAILURE! -- in web.example.com.tmdb.components.tmdb.business.boundary.TmdbApiServiceIntegrationTest
+web.example.com.tmdb.components.tmdb.business.boundary.TmdbApiServiceIntegrationTest.getMovieDetails_ShouldReturnFullDetails_WhenMovieExists -- Time elapsed: 0.171 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+expected: "1999-03-30"
+ but was: "1999-03-31"
+	at web.example.com.tmdb.components.tmdb.business.boundary.TmdbApiServiceIntegrationTest.getMovieDetails_ShouldReturnFullDetails_WhenMovieExists(TmdbApiServiceIntegrationTest.java:91)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

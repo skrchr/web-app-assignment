@@ -1,2 +1,10 @@
-/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/demo/DemoApplication.java
-/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/demo/ServletInitializer.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/TmdbApplication.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/boundary/TmdbApiService.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/control/TmdbApiServiceImpl.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/entity/MovieDto.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/entity/TmdbMovieDetailsResponse.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/entity/TmdbMovieResponse.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/entity/TmdbPopularMoviesResponse.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/entity/TmdbSearchMoviesResponse.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/business/entity/TmdbSearchRequest.java
+/Users/chris/web-app-assignment/backend/src/main/java/web/example/com/tmdb/components/tmdb/config/RestConfig.java

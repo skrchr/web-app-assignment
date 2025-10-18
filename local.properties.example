@@ -1,0 +1,7 @@
+# Local configuration file example
+# Copy this file to local.properties and add your actual API key
+# The local.properties file is ignored by git
+
+# Get your API key from: https://www.themoviedb.org/settings/api
+tmdb.api.key=YOUR_API_KEY_HERE
+
